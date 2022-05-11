@@ -1,4 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css'
 import TodoList from './TodoList';
 
 const LOCAL_STORAGE_KEY = 'todoApps.todos'
@@ -48,6 +50,10 @@ function App() {
     setTodos(newTodos)
   }
 
+  function goToRanking(){
+    
+  }
+
   return (
     <>
       <h1> Beat Me </h1>
@@ -55,7 +61,11 @@ function App() {
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}> Add Todo </button>
       <button onClick={handleClearTodos}> Clear Complete </button>
+      <button onClick={goToRanking}> Ranking </button>
       <div>{todos.filter(todo => !todo.complete).length}</div>
+      <Popup trigger={<button> Trigger</button>} position="right center">
+        < TodoList todos = {todos} toogleTodo= {toggleTodo}/>
+      </Popup>
     </>
   )
 
