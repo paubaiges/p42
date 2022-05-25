@@ -23,9 +23,9 @@ function App() {
       console.log(error)
     }
   }
-  const añadirUsuarios = async(hola) =>{
+  const añadirUsuarios = async(name) =>{
     try{
-      axios.get("http://127.0.0.1:5000/signup_user/" + hola)
+      axios.get("http://127.0.0.1:5000/signup_user/" + name)
 
       
     }

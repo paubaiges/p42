@@ -26,11 +26,19 @@ def load_json(name_file):
 @app.route("/signup_user/<name>")
 def sign_up(name):
     users = load_json("users.json")
+    print(users)
     if name not in users:
         users[name] = {}
         save_json(users, "users.json")
     return f"Done"
 
+@app.route("/addscore/<name>/<score>")
+def addscore(name, score):
+    users = load_json("users.json")
+    users[name] = {"score":score}
+    print(users)
+    save_json(users, "users.json")
+    return f"Done"
 
 @app.route("/list_users")
 def list_users():
