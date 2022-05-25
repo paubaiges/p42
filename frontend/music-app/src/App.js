@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css'
 import TodoList from './TodoList';
+import axios from 'axios';
 
 
 const LOCAL_STORAGE_KEY = 'todoApps.todos'
@@ -12,7 +13,31 @@ function App() {
   obtenerLocalStorage()
   const pistas = [{Pista: 1, select: false}, {Pista: 2, select:false}, {Pista: 3, select:false}]
   
-  const todoNameRef = useRef();
+  const obtenerUsuarios = async() =>{
+    try{
+      const respuesta = await axios.get("http://127.0.0.1:5000/list_users")
+
+      console.log(respuesta.data)
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+  const añadirUsuarios = async(hola) =>{
+    try{
+      axios.get("http://127.0.0.1:5000/signup_user/" + hola)
+
+      
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+  añadirUsuarios("Lola")
+  obtenerUsuarios()
+  //Dentro de data tendremos la info
+  
+    const todoNameRef = useRef();
 
   function fake_axios_post(){
     console.log('axios post');
@@ -81,6 +106,17 @@ function App() {
   function obtenerLocalStorage(){
     valores = JSON.parse(localStorage.getItem("fichero"))
   }
+/*
+  async function hacerPeticion() {
+    // Realiza la petición
+    const miFetch = await fetch('https://127.0.0.1:5000/list_users');
+    // Transforma la respuesta. En este caso lo convierte a JSON
+    const json = await miFetch.json();
+    // Imprimo por consola
+    console.log(json);
+  }
+  */
+
 /*
   function verifica_seleccion(check){
     if(!check.checked){

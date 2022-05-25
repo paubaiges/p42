@@ -5,12 +5,12 @@
 
 
 from markupsafe import escape
-from flask import Flask
+from flask import Flask, render_template
 from pysondb import db
 from flask import jsonify
 import json
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='src')
 
 def save_json(dictionary, name_file):
     with open(name_file, 'w') as fp:
@@ -35,3 +35,5 @@ def sign_up(name):
 @app.route("/list_users")
 def list_users():
     return jsonify(load_json("users.json"))
+
+
